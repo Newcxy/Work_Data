@@ -8,7 +8,7 @@ Created on Fri Aug  2 13:43:22 2019
 import pandas as pd
 from openpyxl import load_workbook
 from configparser import ConfigParser
-from os import listdir, system
+from os import listdir, system, rename
 from datetime import datetime
 from copy import copy
 
@@ -591,8 +591,14 @@ if FLAG:
 else:
     flie_lst = (rd_file,file_holding,file_analys,file_futures,comb_file)
 
+'''
 for file in flie_lst:
     system('move ' + file + ' ' + PATH)
+'''
+
+for file in flie_lst:
+    rename('.\\{}'.format(file), '.\\HIST\\{}'.format(file))
+    print('move {}'.format(file))
 
 def Sleep_Secs(secs_n=5):
     time_0 = datetime.now()
