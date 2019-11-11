@@ -377,8 +377,14 @@ ws['E29'].value = futures_analys.loc[futures_analys.基金名称 == '自营权�
 ws['G29'].value = sum(futures_analys.loc[futures_analys.基金名称 == '自营量化1号','风险比例1(%)'].values) / 100
 ws['I29'].value = futures_analys.loc[futures_analys.资产单元名称 == '权益类场内01资产单元','风险比例1(%)'].values[0] / 100
 
+'''
 ws['C18'].value = sheet_2[['证券名称', '持仓/总股本']].max().values[0]
 ws['D18'].value = sheet_2[['证券名称', '持仓/总股本']].max().values[1]
+'''
+
+max_dict = max(sheet_2[['证券名称', '持仓/总股本']].to_dict(orient='records'), key=lambda s: s['持仓/总股本'])
+ws['C18'].value = max_dict['证券名称']
+ws['D18'].value = max_dict['持仓/总股本']
   
 for col in ws['F21:F23']:
     for row in col:
